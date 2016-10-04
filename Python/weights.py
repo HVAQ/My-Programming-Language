@@ -2,11 +2,11 @@ import sys, pygame
 from pygame.locals import *
 from random import randrange
 
-class Wegiht(pygame.sprite.Sprite):
+class Weight(pygame.sprite.Sprite):
 
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-		self.image = weight_image
+		self.image = Weight_image
 		self.rect = self.image.get_rect()
 		self.reset()
 
@@ -25,8 +25,8 @@ screen_size = 800, 600
 pygame.display.set_mode(screen_size, FULLSCREEN)
 pygame.mouse.set_visible(0)
 
-Wegiht_image = pygame.image.load('weight.png')
-Wegiht_image = wegiht_image.convert() # ...to match the display
+Weight_image = pygame.image.load('weight.png')
+Weight_image = Weight_image.convert() # ...to match the display
 
 sprites = pygame.sprite.RenderUpdates()
 sprites.add(Weight())
