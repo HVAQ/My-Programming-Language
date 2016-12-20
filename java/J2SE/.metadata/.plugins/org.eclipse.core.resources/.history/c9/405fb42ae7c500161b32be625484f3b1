@@ -1,0 +1,34 @@
+package com.hpf.test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class TestMysql {
+	private static final String MYSQLDRIVER = "com.mysql.jdbc.Driver";
+	private static final String MYSQLURL = "jdbc:mysql://localhost:3306/test";
+	private static final String USER = "root";
+	private static final String PASSWORD = "950916Pf,.";
+	public static void main(String[] args) {
+		Connection conn = null;
+		// 第一步、加载数据库驱动程序，此时不需要实例化，因为会由容器自己负责管理
+		try {
+			Class.forName(MYSQLDRIVER);
+			// 第二步、连接数据库
+			conn = DriverManager.getConnection(MYSQLURL, USER, PASSWORD);
+			System.out.println("数据库已连接");
+			String querySql = "SELECT user FROM user";	
+		} catch (Exception e) {
+			System.out.println("数据库连接异常");
+		} finally {
+			// 第四步、关闭数据库
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("数据库关闭异常");
+			}
+		}
+	}
+
+}

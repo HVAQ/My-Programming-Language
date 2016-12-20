@@ -1,0 +1,10 @@
+package com.hpf.test;
+
+public class TestIntAndAbs {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

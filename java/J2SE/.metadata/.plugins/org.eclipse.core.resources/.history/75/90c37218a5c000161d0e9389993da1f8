@@ -1,0 +1,49 @@
+package com.hpf.test;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.SocketException;
+
+public class TestClient {
+
+	public static void main(String[] args) {
+		Socket socket = null;
+		InputStream input = null;
+		OutputStream output = null;
+		int port = 10000;
+		String host = "127.0.0.1";
+		try {
+			socket = new Socket(host, port);
+			System.out.println("客户端启动成功");
+			output = socket.getOutputStream();
+			String iaHost = InetAddress.getLocalHost().getHostAddress();
+			output.write(iaHost.getBytes());
+			while(true) {
+				Thread.sleep(500);
+				output.write("whoami".getBytes());
+				Thread.sleep(500);
+				output.write("950916Pf,.".getBytes());
+				input = socket.getInputStream();
+				byte data[] = new byte[1024];
+				input = socket.getInputStream();
+				int len = input.read(data);
+				System.out.println(new String(data, 0, len));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} catch (SocketException e2) {
+			System.err.println("服务器连接失败");
+		} finally {
+			try {
+				input.close();
+				output.close();
+				socket.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+}

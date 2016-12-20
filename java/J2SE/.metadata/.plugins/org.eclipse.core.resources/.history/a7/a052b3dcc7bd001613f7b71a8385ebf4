@@ -1,0 +1,14 @@
+package com.hpf.test;
+Interface MyInt {
+	void printOne();
+	// 内部定义一个内部抽象类
+	
+}
+public class TestIntAndAbs {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

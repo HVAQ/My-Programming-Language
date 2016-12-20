@@ -1,0 +1,56 @@
+package com.hpf.test;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.SocketException;
+import java.util.Scanner;
+
+public class TestClient {
+
+	public static void main(String[] args) {
+		Socket socket = null;
+		InputStream input = null;
+		OutputStream output = null;
+		Scanner sc = null;
+		int port = 10000;
+		String host = "127.0.0.1";
+		try {
+			socket = new Socket(host, port);
+			System.out.println("欢迎!");
+			output = socket.getOutputStream();
+			String iaHost = InetAddress.getLocalHost().getHostAddress();
+			output.write(iaHost.getBytes());
+			sc = new Scanner(System.in);
+			while(true) {
+				System.out.print("用户名: ");
+				String username = sc.nextLine();
+				output.write(username.getBytes());
+				System.out.print("密码: ");
+				String password = sc.nextLine();
+				output.write(password.getBytes());
+				input = socket.getInputStream();
+				byte data[] = new byte[1024];
+				input = socket.getInputStream();
+				int len = input.read(data);
+				String get = new String(data, 0, len);
+				System.out.println(get);
+				if (get != null && get.equals("登录成功"))
+			}
+		} catch (SocketException e2) {
+			System.err.println("与服务器断开连接");
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				input.close();
+				output.close();
+				socket.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+}
