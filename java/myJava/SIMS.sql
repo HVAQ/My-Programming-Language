@@ -1,0 +1,50 @@
+# 学生信息管理系统(Student Information Management System)数据库
+CREATE DATABASE sims;
+
+use sims;
+# 建立学校表(School)
+CREATE TABLE school (
+    no            VARCHAR(30)     NOT NULL,
+    name          VARCHAR(30)     NOT NULL
+); 
+
+# 建立系部表(Departments)
+CREATE TABLE departments (
+    no            VARCHAR(30)     NOT NULL,      # 组织机构代码
+    name          VARCHAR(30)     NOT NULL,
+    note          VARCHAR(200)    NOT NULL,      # 备注
+    lev           INT             DEFAULT 1,     # 成员等级
+    superior      VARCHAR(30)     NOT NULL
+);
+
+# 建立专业表(Specialities)
+CREATE TABLE specialities (
+    no            VARCHAR(30)     NOT NULL,
+    name          VARCHAR(30)     NOT NULL,
+    note          VARCHAR(200)    NOT NULL,
+    lev           INT             DEFAULT 2,
+    superior      VARCHAR(30)     NOT NULL      # 所属系部
+);
+
+# 建立班级表(Classes)
+CREATE TABLE classes (
+    no            VARCHAR(30)     NOT NULL,
+    name          VARCHAR(30)     NOT NULL,
+    note          VARCHAR(200)    NOT NULL,
+    lev           INT             DEFAULT 3,
+    superior      VARCHAR(30)     NOT NULL
+);
+
+# 建立学生表(students)
+CREATE TABLE students (
+    no            VARCHAR(30)     NOT NULL,       # 学号
+    name          VARCHAR(20)     NOT NULL,
+    picture       VARCHAR(50),                    # 照片存储区路径
+    birthday      date            NOT NULL,       # 出生年月
+    year          date            NOT NULL,       # 入学年份
+    duration      INT             NOT NULL,       # 学制
+    war           INT             NOT NULL,       # 在校、休学、退学、毕业
+    note          VARCHAR(400)    NOT NULL,       # 学生信息备注
+    lev           INT             DEFAULT 4,
+    superior      VARCHAR(30)     NOT NULL
+);
